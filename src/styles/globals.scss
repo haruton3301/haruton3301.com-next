@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#__next {
+  min-height: 100vh;
+  display: grid;
+  background: #fff;
+  grid-template-rows: auto 1fr auto;
+}
