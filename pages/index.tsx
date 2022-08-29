@@ -1,11 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import React from 'react'
+import type { NextPage } from 'next/types'
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <>
       <button className="btn btn-primary">Hello</button>
     </>
   )
 }
+
+export default Home
