@@ -1,9 +1,11 @@
 import type { NextPage } from 'next/types'
 
+import { Layout } from '~/components/Layout'
+
 const Home: NextPage = () => {
   return (
     <>
-      <button className="btn btn-primary">Hello</button>
+      <div className="w-full h-screen"></div>
     </>
   )
 }
