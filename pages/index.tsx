@@ -5,7 +5,7 @@ import React from 'react'
 export default function Home() {
   return (
     <>
-      <button className="btn btn-primary">Hello</button>
+      <button className="btn btn-primar">Hello</button>
     </>
   )
 }

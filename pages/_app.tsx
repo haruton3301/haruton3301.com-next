@@ -1,9 +1,8 @@
-// import '../styles/globals.css'
+import '~/styles/globals.scss'
 import React from 'react'
-import 'tailwindcss/tailwind.css'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function MyApp({ Component }) {
+  return <Component />
 }
 
 export default MyApp
