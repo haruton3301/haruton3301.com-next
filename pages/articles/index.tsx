@@ -16,7 +16,6 @@ type Props = {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const { items }: EntryCollection<IPostFields> = await client.getEntries({
-    limit: 5,
     content_type: 'article',
     order: '-sys.createdAt'
   })
@@ -26,16 +25,21 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   }
 }
 
-const Home: NextPage<Props> = (props) => {
+const Articles: NextPage<Props> = (props) => {
   const { posts } = props
 
   return (
-    <Layout title="" description="忘れないようにメモを残します" type="blog">
-      <Breadcrumb breadcrumbs={[{ name: 'Home', slug: '' }]} />
-      <PageTitle title="おすすめ記事" />
+    <Layout title="記事一覧" description="記事一覧ページです。" type="blog" url="articles">
+      <Breadcrumb
+        breadcrumbs={[
+          { name: 'Home', slug: '' },
+          { name: '記事一覧', slug: 'articles' }
+        ]}
+      />
+      <PageTitle title="記事一覧" />
       <ArticleList posts={posts} />
     </Layout>
   )
 }
 
-export default Home
+export default Articles
