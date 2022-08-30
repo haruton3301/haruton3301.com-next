@@ -32,7 +32,7 @@ export const Article: React.FC<Props> = (props) => {
   return (
     <>
       <section className="max-w-4xl mx-auto mb-5">
-        <article className="bg-white px-8 py-7">
+        <article className="bg-white px-3 md:px-8 py-7">
           <section className="text-md text-stone-500">
             <span className="mr-3">
               投稿日
