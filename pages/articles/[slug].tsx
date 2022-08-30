@@ -6,6 +6,7 @@ import { Article } from '~/components/Article'
 import { ArticleList } from '~/components/ArticleList'
 import { Breadcrumb } from '~/components/Breadcrumb'
 import { PageTitle } from '~/components/PageTitle'
+import { ScrollToTop } from '~/components/utils/ScrollToTop'
 import { Layout } from '~/contents/Layout'
 import type { IPostFields } from '~/libs/contentful'
 import { buildClient } from '~/libs/contentful'
@@ -87,7 +88,7 @@ const ArticleSingle: NextPage<Props> = (props) => {
         ]}
       />
       <Article post={post} />
-      <PageTitle title="記事一覧" />
+      {relatedPosts.length > 0 && <PageTitle title="関連記事" />}
       <ArticleList posts={relatedPosts} />
     </Layout>
   )

@@ -6,6 +6,7 @@ type MyAppProps = AppProps
 
 export const MyApp = (props: MyAppProps) => {
   const { Component, pageProps } = props
+
   return <Component {...pageProps} />
 }
 

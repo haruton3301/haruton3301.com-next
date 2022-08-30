@@ -10,7 +10,7 @@ type Props = {
 
 export const ArticleList: React.FC<Props> = (props) => {
   const { posts } = props
-  console.warn(posts)
+
   return (
     <>
       <section className="max-w-4xl mx-auto">

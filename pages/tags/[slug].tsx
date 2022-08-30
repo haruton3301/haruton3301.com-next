@@ -58,7 +58,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       order: 'sys.createdAt'
     })
     tag = items[0]
-    console.warn(tag)
   }
 
   return {
@@ -77,7 +76,7 @@ const TagSingle: NextPage<Props> = (props) => {
       <Breadcrumb
         breadcrumbs={[
           { name: 'Home', slug: '' },
-          { name: '記事一覧', slug: 'articles' },
+          { name: 'タグ一覧', slug: 'tags' },
           { name: tagName, slug: tagSlug }
         ]}
       />

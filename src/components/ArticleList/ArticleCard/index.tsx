@@ -21,7 +21,7 @@ export const ArticleCard: React.FC<Props> = (props) => {
   return (
     <>
       <article className="bg-white mt-5 px-6 py-5 relative">
-        <Link href={href}>
+        <Link href={href} scroll={true}>
           <a className="absolute top-0 bottom-0 left-0 right-0"></a>
         </Link>
         <section className="text-sm text-stone-500">
