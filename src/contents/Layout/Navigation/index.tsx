@@ -1,17 +1,20 @@
 import Link from 'next/link'
-import { FaHome } from 'react-icons/fa'
+import { BsFillShieldFill, BsFillTagFill } from 'react-icons/bs'
+import { FaHome, FaWindowMaximize } from 'react-icons/fa'
+import { GrMail } from 'react-icons/gr'
+import { RiAccountCircleFill } from 'react-icons/ri'
 
 export const Navigation: React.FC = () => {
   const navListA = [
     { icon: <FaHome />, name: 'Home', href: '/' },
-    { icon: <FaHome />, name: '記事一覧', href: '/' },
-    { icon: <FaHome />, name: 'タグ一覧', href: '/' }
+    { icon: <FaWindowMaximize />, name: '記事一覧', href: '/articles' },
+    { icon: <BsFillTagFill />, name: 'タグ一覧', href: '/tags' }
   ]
 
   const navListB = [
-    { icon: <FaHome />, name: '運営者情報', href: '/' },
-    { icon: <FaHome />, name: 'プライバシーポリシー', href: '/' },
-    { icon: <FaHome />, name: 'お問合わせ', href: '/' }
+    { icon: <RiAccountCircleFill />, name: '運営者情報', href: '/profile' },
+    { icon: <BsFillShieldFill />, name: 'プライバシーポリシー', href: '/policy' },
+    { icon: <GrMail />, name: 'お問合わせ', href: '/contact' }
   ]
 
   return (
