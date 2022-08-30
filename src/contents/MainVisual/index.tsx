@@ -1,6 +1,6 @@
 export const MainVisual: React.FC = () => {
   return (
-    <section className="max-w-4xl mx-auto mb-8">
+    <section className="max-w-4xl px-3 lg:px-0 mx-auto mb-8 ">
       <div className="mockup-code">
         <pre data-prefix="$">
           <code>npm i haruton3301.com</code>
