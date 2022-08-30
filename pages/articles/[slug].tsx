@@ -1,5 +1,6 @@
 import type { Entry, EntryCollection } from 'contentful'
-import type { GetStaticProps, NextPage } from 'next/types'
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
+import type { ParsedUrlQuery } from 'querystring'
 
 import { Article } from '~/components/Article'
 import { ArticleList } from '~/components/ArticleList'
@@ -16,7 +17,11 @@ type Props = {
   relatedPosts: Entry<IPostFields>[]
 }
 
-export const getStaticPaths = async () => {
+interface IParams extends ParsedUrlQuery {
+  slug: string
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
   const { items }: EntryCollection<IPostFields> = await client.getEntries({
     content_type: 'article',
     order: '-sys.createdAt'
@@ -33,10 +38,11 @@ export const getStaticPaths = async () => {
   return { paths, fallback: false }
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { slug } = context.params as IParams
   const { items }: EntryCollection<IPostFields> = await client.getEntries({
     content_type: 'article',
-    'fields.slug': params.slug,
+    'fields.slug': slug,
     limit: 1
   })
 
@@ -48,14 +54,14 @@ export const getStaticProps = async ({ params }) => {
     tagQuery += `${post.fields.tags[i].fields.slug}${separater}`
   }
 
-  const _relatedPosts = await client.getEntries({
+  const _relatedPosts = (await client.getEntries({
     content_type: 'article',
     order: '-sys.createdAt',
     'metadata.tags.sys.id[in]': tagQuery,
     limit: 6
-  })
+  })) as EntryCollection<IPostFields>
 
-  const relatedPosts = _relatedPosts.items.filter((item) => !(item.fields.slug === params.slug))
+  const relatedPosts = _relatedPosts.items.filter((item) => !(item.fields.slug === slug))
 
   return {
     props: { post, relatedPosts }

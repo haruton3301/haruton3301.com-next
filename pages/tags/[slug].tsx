@@ -1,7 +1,7 @@
 import type { Entry, EntryCollection } from 'contentful'
-import type { GetStaticProps, NextPage } from 'next/types'
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
+import type { ParsedUrlQuery } from 'querystring'
 
-import { Article } from '~/components/Article'
 import { ArticleList } from '~/components/ArticleList'
 import { Breadcrumb } from '~/components/Breadcrumb'
 import { PageTitle } from '~/components/PageTitle'
@@ -16,7 +16,11 @@ type Props = {
   posts: Entry<IPostFields>[]
 }
 
-export const getStaticPaths = async () => {
+interface IParams extends ParsedUrlQuery {
+  slug: string
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
   const { items }: EntryCollection<ITagFields> = await client.getEntries({
     content_type: 'tags',
     order: '-sys.createdAt'
@@ -31,8 +35,8 @@ export const getStaticPaths = async () => {
   return { paths, fallback: false }
 }
 
-export const getStaticProps = async ({ params }) => {
-  const { slug } = params
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { slug } = context.params as IParams
 
   let posts
   {
