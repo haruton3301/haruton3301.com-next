@@ -1,8 +1,6 @@
 import type { Entry, EntryCollection } from 'contentful'
-import { useRouter } from 'next/router'
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
 import type { ParsedUrlQuery } from 'querystring'
-import { useEffect } from 'react'
 
 import { Article } from '~/components/Article'
 import { ArticleList } from '~/components/ArticleList'
@@ -72,11 +70,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 const ArticleSingle: NextPage<Props> = (props) => {
   const { post, relatedPosts } = props
-  // const router = useRouter()
-  // useEffect(() => {
-  //   console.warn('alfkjsalkf')
-  //   window.scrollTo(0, 500)
-  // }, [])
 
   return (
     <Layout
