@@ -4,7 +4,13 @@ import { FaHome, FaWindowMaximize } from 'react-icons/fa'
 import { GrMail } from 'react-icons/gr'
 import { RiAccountCircleFill } from 'react-icons/ri'
 
-export const Navigation: React.FC = () => {
+type Props = {
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
+}
+
+export const Navigation: React.FC<Props> = (props) => {
+  const { isOpen, setIsOpen } = props
   const navListA = [
     { icon: <FaHome />, name: 'Home', href: '/' },
     { icon: <FaWindowMaximize />, name: '記事一覧', href: '/articles' },
@@ -19,8 +25,23 @@ export const Navigation: React.FC = () => {
 
   return (
     <>
-      <div className="drawer-side">
-        <label htmlFor="my-drawer" className="drawer-overlay"></label>
+      <div
+        className={
+          'fixed left-0 top-0 w-screen h-screen z-40 bg-black transform ease-in-out duration-300 ' +
+          (isOpen
+            ? 'transition-opacity opacity-30 pointer-events-auto'
+            : ' transition-opacity opacity-0 pointer-events-none')
+        }
+        onClick={() => {
+          setIsOpen(false)
+        }}
+      ></div>
+      <div
+        className={
+          'fixed left-0 top-0 z-50 transform ease-in-out duration-200 transition-transform  -translate-x-72' +
+          (isOpen ? 'transition-opacity opacity-100 translate-x-0' : ' transition-all  -translate-x-72')
+        }
+      >
         <nav className="h-screen rounded w-72 bg-white py-4 text-base-content">
           <ul className="divide-y">
             <div>

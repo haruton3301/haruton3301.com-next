@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useState } from 'react'
 
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -15,6 +16,8 @@ type Props = {
 
 export const Layout: React.FC<Props> = (props) => {
   const { children, description, keywords, title, type, url } = props
+
+  const [isOpen, setIsOpen] = useState(false)
 
   const titleText = title ? `${title} | はるとんのブログ` : 'はるとんのブログ'
   const urlText = url ? `https://haruton3301.com/${url}` : 'https://haruton3301.com'
@@ -36,18 +39,15 @@ export const Layout: React.FC<Props> = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="drawer">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col min-h-screen bg-stone-100">
-          <Header />
+      <div className="flex flex-col min-h-screen bg-stone-100">
+        <Header isOpen={isOpen} setIsOpen={setIsOpen} />
 
-          <main className="pb-5 flex-1">{children}</main>
+        <main className="pb-5 flex-1">{children}</main>
 
-          <Footer />
-        </div>
-
-        <Navigation />
+        <Footer />
       </div>
+
+      <Navigation isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   )
 }

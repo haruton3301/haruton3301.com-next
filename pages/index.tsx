@@ -5,6 +5,7 @@ import { ArticleList } from '~/components/ArticleList'
 import { Breadcrumb } from '~/components/Breadcrumb'
 import { PageTitle } from '~/components/PageTitle'
 import { Layout } from '~/contents/Layout'
+import { MainVisual } from '~/contents/MainVisual'
 import type { IPostFields } from '~/libs/contentful'
 import { buildClient } from '~/libs/contentful'
 
@@ -32,6 +33,7 @@ const Home: NextPage<Props> = (props) => {
   return (
     <Layout title="" description="忘れないようにメモを残します" type="blog">
       <Breadcrumb breadcrumbs={[{ name: 'Home', slug: '' }]} />
+      <MainVisual />
       <PageTitle title="おすすめ記事" />
       <ArticleList posts={posts} />
     </Layout>
