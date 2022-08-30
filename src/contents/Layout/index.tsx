@@ -38,10 +38,10 @@ export const Layout: React.FC<Props> = (props) => {
       </Head>
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content flex flex-col min-h-screen bg-stone-100">
           <Header />
 
-          <main className="bg-stone-100 pb-5">{children}</main>
+          <main className="pb-5 flex-1">{children}</main>
 
           <Footer />
         </div>
