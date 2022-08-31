@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { BiMenu } from 'react-icons/bi'
 
@@ -12,7 +11,7 @@ export const Header: React.FC<Props> = (props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-30 bg-opacity-70 backdrop-blur shadow-md">
+      <header className="sticky top-0 z-20 bg-opacity-70 backdrop-blur shadow-md">
         <div className="w-full navbar flex justify-center relative">
           <div className="absolute left-0 ml-2">
             <button
@@ -28,7 +27,7 @@ export const Header: React.FC<Props> = (props) => {
             <Link href="/">
               <a>
                 <button className="btn btn-ghost h-10">
-                  <Image src="/images/header_logo.png" alt="はるとんのブログ" width={209} height={34} quality={100} />
+                  <img src="/images/header_logo.png" alt="はるとんのブログ" style={{ width: 209, height: 34 }} />
                 </button>
               </a>
             </Link>
