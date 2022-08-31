@@ -3,7 +3,6 @@ import type { GetStaticProps, NextPage } from 'next/types'
 
 import { ArticleList } from '~/components/ArticleList'
 import { Breadcrumb } from '~/components/Breadcrumb'
-import { Loading } from '~/components/Loading'
 import { PageTitle } from '~/components/PageTitle'
 import { Layout } from '~/contents/Layout'
 import { MainVisual } from '~/contents/MainVisual'
