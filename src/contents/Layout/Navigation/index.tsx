@@ -27,7 +27,7 @@ export const Navigation: React.FC<Props> = (props) => {
     <>
       <div
         className={
-          'fixed left-0 top-0 w-screen h-screen z-40 bg-black transform ease-in-out duration-300 ' +
+          'fixed left-0 top-0 w-screen h-screen z-30 bg-black transform ease-in-out duration-300 ' +
           (isOpen
             ? 'transition-opacity opacity-30 pointer-events-auto'
             : ' transition-opacity opacity-0 pointer-events-none')
@@ -38,7 +38,7 @@ export const Navigation: React.FC<Props> = (props) => {
       ></div>
       <div
         className={
-          'fixed left-0 top-0 z-50 transform ease-in-out duration-200 transition-transform  -translate-x-72' +
+          'fixed left-0 top-0 z-40 transform ease-in-out duration-200 transition-transform  -translate-x-72' +
           (isOpen ? 'transition-opacity opacity-100 translate-x-0' : ' transition-all  -translate-x-72')
         }
       >
