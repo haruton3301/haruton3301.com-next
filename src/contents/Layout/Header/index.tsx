@@ -11,7 +11,7 @@ export const Header: React.FC<Props> = (props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 bg-opacity-70 backdrop-blur shadow-md">
+      <header className="sticky top-0 z-20 bg-opacity-70 backdrop-blur backdrop-saturate-[180%] shadow-md">
         <div className="w-full navbar flex justify-center relative">
           <div className="absolute left-0 ml-2">
             <button
