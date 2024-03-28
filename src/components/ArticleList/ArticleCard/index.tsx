@@ -3,13 +3,13 @@ import { ja } from 'date-fns/locale'
 import Link from 'next/link'
 import { BsFillTagFill } from 'react-icons/bs'
 
-import type { IChildTagFields } from '~/libs/contentful'
+import type { ITagFields } from '~/libs/contentful'
 
 type Props = {
   title: string
   createdAt: string
   slug: string
-  tags: IChildTagFields[]
+  tags: ITagFields[]
 }
 
 export const ArticleCard: React.FC<Props> = (props) => {
@@ -40,8 +40,8 @@ export const ArticleCard: React.FC<Props> = (props) => {
           <ul className="flex items-center text-sm">
             {tags.map((tag, i) => {
               const separater = i !== tags.length - 1 ? ', ' : ''
-              const tagName = `${tag.fields.name}${separater}`
-              const tagSlug = tag.fields.slug
+              const tagName = `${tag.name}${separater}`
+              const tagSlug = tag.slug
               const tagHref = `/tags/${tagSlug}`
               return (
                 <li key={tagName} className="mr-2">

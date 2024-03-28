@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { useState } from 'react'
 
+import { TagsProvider } from '~/context/tags'
+
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { Navigation } from './Navigation'
@@ -22,7 +24,7 @@ export const Layout: React.FC<Props> = (props) => {
   const titleText = title ? `${title} | はるとんのブログ` : 'はるとんのブログ'
   const urlText = url ? `https://haruton3301.com/${url}` : 'https://haruton3301.com'
   return (
-    <>
+    <TagsProvider>
       <Head>
         <title>{titleText}</title>
         <meta name="description" content={description} />
@@ -48,6 +50,6 @@ export const Layout: React.FC<Props> = (props) => {
       </div>
 
       <Navigation isOpen={isOpen} setIsOpen={setIsOpen} />
-    </>
+    </TagsProvider>
   )
 }

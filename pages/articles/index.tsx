@@ -7,6 +7,7 @@ import { PageTitle } from '~/components/PageTitle'
 import { Layout } from '~/contents/Layout'
 import type { IPostFields } from '~/libs/contentful'
 import { buildClient } from '~/libs/contentful'
+import { getTagName } from '~/libs/tags'
 
 const client = buildClient()
 
@@ -20,8 +21,21 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     order: '-sys.createdAt'
   })
 
+  const { items: tags } = await client.getTags()
+
+  const posts = items.map((post) => {
+    post.fields.tags = post.metadata.tags.map((tag) => {
+      const { id } = tag.sys
+      return {
+        slug: id,
+        name: getTagName(id, tags)
+      }
+    })
+    return post
+  })
+
   return {
-    props: { posts: items }
+    props: { posts }
   }
 }
 

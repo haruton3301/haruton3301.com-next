@@ -18,10 +18,10 @@ export interface IPostFields {
   title: string
   slug: string
   content: Document
-  tags: IChildTagFields[]
   contentMarkdown: string
   description: string
   keywords: string
+  tags: ITagFields[]
 }
 
 export interface IPost extends Entry<IPostFields> {

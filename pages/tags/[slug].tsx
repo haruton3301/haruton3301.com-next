@@ -1,4 +1,4 @@
-import type { Entry, EntryCollection } from 'contentful'
+import type { Entry, EntryCollection, Tag } from 'contentful'
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
 import type { ParsedUrlQuery } from 'querystring'
 
@@ -6,13 +6,14 @@ import { ArticleList } from '~/components/ArticleList'
 import { Breadcrumb } from '~/components/Breadcrumb'
 import { PageTitle } from '~/components/PageTitle'
 import { Layout } from '~/contents/Layout'
-import type { IPostFields, ITagFields } from '~/libs/contentful'
+import type { IPostFields } from '~/libs/contentful'
 import { buildClient } from '~/libs/contentful'
+import { getTagName } from '~/libs/tags'
 
 const client = buildClient()
 
 type Props = {
-  tag: Entry<ITagFields>
+  tag: Tag
   posts: Entry<IPostFields>[]
 }
 
@@ -21,14 +22,11 @@ interface IParams extends ParsedUrlQuery {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { items }: EntryCollection<ITagFields> = await client.getEntries({
-    content_type: 'tags',
-    order: '-sys.createdAt'
-  })
+  const { items } = await client.getTags()
 
   const paths = items.map((tag) => ({
     params: {
-      slug: tag.fields.slug
+      slug: tag.sys.id
     }
   }))
 
@@ -38,6 +36,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as IParams
 
+  const { items: tags } = await client.getTags()
+
   let posts
   {
     const { items }: EntryCollection<IPostFields> = await client.getEntries({
@@ -46,18 +46,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
       content_type: 'article',
       order: '-sys.createdAt'
     })
-    posts = items
+    posts = items.map((post) => {
+      post.fields.tags = post.metadata.tags.map((tag) => {
+        const { id } = tag.sys
+        return {
+          slug: id,
+          name: getTagName(id, tags)
+        }
+      })
+      return post
+    })
   }
 
   let tag
   {
-    const { items }: EntryCollection<ITagFields> = await client.getEntries({
-      limit: 1,
-      content_type: 'tags',
-      'fields.slug': slug,
-      order: 'sys.createdAt'
-    })
-    tag = items[0]
+    tag = tags.find((tag) => tag.sys.id === slug) as Tag
   }
 
   return {
@@ -68,8 +71,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const TagSingle: NextPage<Props> = (props) => {
   const { posts, tag } = props
 
-  const tagName = tag.fields.name
-  const tagSlug = tag.fields.slug
+  const tagName = tag.name
+  const tagSlug = tag.sys.id
 
   return (
     <Layout title={tagName} description={`タグ${tagName}の一覧ページです。`} type="article" url={`articles${tagSlug}`}>

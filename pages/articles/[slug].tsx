@@ -9,6 +9,7 @@ import { PageTitle } from '~/components/PageTitle'
 import { Layout } from '~/contents/Layout'
 import type { IPostFields } from '~/libs/contentful'
 import { buildClient } from '~/libs/contentful'
+import { getTagName } from '~/libs/tags'
 
 const client = buildClient()
 
@@ -46,22 +47,43 @@ export const getStaticProps: GetStaticProps = async (context) => {
     limit: 1
   })
 
-  const post = items[0]
+  const { items: tags } = await client.getTags()
+
+  const _post = items[0]
+  _post.fields.tags = _post.metadata.tags.map((tag) => {
+    const { id } = tag.sys
+    return {
+      slug: id,
+      name: getTagName(id, tags)
+    }
+  })
+  const post = _post
 
   let tagQuery = ''
   for (let i = 0; i < post.fields.tags.length; i++) {
     const separater = i !== post.fields.tags.length - 1 ? ', ' : ''
-    tagQuery += `${post.fields.tags[i].fields.slug}${separater}`
+    tagQuery += `${post.fields.tags[i].slug}${separater}`
   }
 
-  const _relatedPosts = (await client.getEntries({
+  const { items: _relatedPosts } = (await client.getEntries({
     content_type: 'article',
     order: '-sys.createdAt',
     'metadata.tags.sys.id[in]': tagQuery,
     limit: 6
   })) as EntryCollection<IPostFields>
 
-  const relatedPosts = _relatedPosts.items.filter((item) => !(item.fields.slug === slug))
+  const relatedPosts = _relatedPosts
+    .map((post) => {
+      post.fields.tags = post.metadata.tags.map((tag) => {
+        const { id } = tag.sys
+        return {
+          slug: id,
+          name: getTagName(id, tags)
+        }
+      })
+      return post
+    })
+    .filter((item) => !(item.fields.slug === slug))
 
   return {
     props: { post, relatedPosts }
