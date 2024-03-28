@@ -57,8 +57,8 @@ export const Article: React.FC<Props> = (props) => {
             <ul className="flex items-center text-md">
               {tags.map((tag, i) => {
                 const separater = i !== tags.length - 1 ? ', ' : ''
-                const tagName = `${tag.fields.name}${separater}`
-                const tagSlug = tag.fields.slug
+                const tagName = `${tag.name}${separater}`
+                const tagSlug = tag.slug
                 const tagHref = `/tags/${tagSlug}`
                 return (
                   <li key={tagName} className="mr-2">

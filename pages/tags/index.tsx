@@ -1,11 +1,9 @@
-import type { EntryCollection } from 'contentful'
 import type { GetStaticProps, NextPage } from 'next/types'
 
 import { Breadcrumb } from '~/components/Breadcrumb'
 import { PageTitle } from '~/components/PageTitle'
 import { TagList } from '~/components/TagList'
 import { Layout } from '~/contents/Layout'
-import type { ITagFields } from '~/libs/contentful'
 import { buildClient } from '~/libs/contentful'
 
 const client = buildClient()
@@ -15,15 +13,12 @@ type Props = {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { items }: EntryCollection<ITagFields> = await client.getEntries({
-    content_type: 'tags',
-    order: '-sys.createdAt'
-  })
+  const { items } = await client.getTags()
 
   const tags = items.map((tag) => {
     return {
-      name: tag.fields.name,
-      slug: tag.fields.slug
+      name: tag.name,
+      slug: tag.sys.id
     }
   })
 
