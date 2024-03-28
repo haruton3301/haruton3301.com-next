@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
             </a>
           </div>
           <div className="px-2">
-            <a href="https://github.com/kduxwr" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/haruton3301" target="_blank" rel="noopener noreferrer">
               <FaGithub />
             </a>
           </div>
