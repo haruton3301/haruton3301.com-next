@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-// #__next {
-//   min-height: 100vh;
-//   display: grid;
-//   background: #fff;
-//   grid-template-rows: auto 1fr auto;
-// }
-
 .bg-rainbow {
   background: -moz-linear-gradient(to right, #40e0d0, #ff8c00 40%, #ff0080);
   background: -webkit-linear-gradient(to right, #40e0d0, #ff8c00 40%, #ff0080);

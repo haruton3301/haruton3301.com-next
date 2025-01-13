@@ -7,11 +7,7 @@ export const CustomCode: CodeComponent = ({ children, className, inline }) => {
   const match = /language-(\w+)(:?.+)?/.exec(className || '')
   const lang = match && match[1] ? match[1] : ''
   const name = match && match[2] ? match[2].slice(1) : ''
-  if (lang === 'link') {
-    // blog card
-  } else if (lang === 'twitter') {
-    // twitter embed
-  }
+
   return !inline && match ? (
     <>
       {name && <span className="rounded-md bg-stone-200 py-1 px-2 text-sm dark:bg-stone-600">{name}</span>}

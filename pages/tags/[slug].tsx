@@ -41,7 +41,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   let posts
   {
     const { items }: EntryCollection<IPostFields> = await client.getEntries({
-      // 'fields.tags.sys.contentType.sys.id': 'tags', // ←これも必要
       'metadata.tags.sys.id[all]': slug,
       content_type: 'article',
       order: '-sys.createdAt'

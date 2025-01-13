@@ -20,7 +20,6 @@ const Contact: NextPage = () => {
           id="em-form"
           title="em-form"
           frameBorder={0}
-          // allowtransparency={true}
           scrolling="no"
           style={{ width: '100%', height: '400px' }}
           src="https://em-form.web.app/api/tVjIPSYYo5MjqPUvoNp15P7bTss2-BTxlKJphAJiMF10ye8Zn?k=mZpEMrMVH7WKKujxJfeq"
