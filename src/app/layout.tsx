@@ -19,8 +19,8 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <meta
-          property="google-site-verification"
-          content="juL8UZi2OMOrnMylA7f6VtmcuijRVXmd5eozMARyKKA"
+          name="google-site-verification"
+          content="uJMHwgyVds8KFNmaUsAyu-H2QuZsxPxj7VxOIXq9Hk4"
         />
         <meta
           name="viewport"
