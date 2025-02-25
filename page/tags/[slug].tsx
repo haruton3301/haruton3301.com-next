@@ -1,14 +1,14 @@
-import type { Entry, EntryCollection, Tag } from 'contentful'
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
-import type { ParsedUrlQuery } from 'querystring'
+import type { Entry, EntryCollection, Tag } from "contentful"
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next/types"
+import type { ParsedUrlQuery } from "querystring"
 
-import { ArticleList } from '~/components/ArticleList'
-import { Breadcrumb } from '~/components/Breadcrumb'
-import { PageTitle } from '~/components/PageTitle'
-import { Layout } from '~/contents/Layout'
-import type { IPostFields } from '~/libs/contentful'
-import { buildClient } from '~/libs/contentful'
-import { getTagName } from '~/libs/tags'
+import { ArticleList } from "@/components/ArticleList"
+import { Breadcrumb } from "@/components/Breadcrumb"
+import { PageTitle } from "@/components/PageTitle"
+import { Layout } from "@/contents/Layout"
+import type { IPostFields } from "@/libs/contentful"
+import { buildClient } from "@/libs/contentful"
+import { getTagName } from "@/libs/tags"
 
 const client = buildClient()
 
@@ -26,8 +26,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = items.map((tag) => ({
     params: {
-      slug: tag.sys.id
-    }
+      slug: tag.sys.id,
+    },
   }))
 
   return { paths, fallback: false }
@@ -41,16 +41,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
   let posts
   {
     const { items }: EntryCollection<IPostFields> = await client.getEntries({
-      'metadata.tags.sys.id[all]': slug,
-      content_type: 'article',
-      order: '-sys.createdAt'
+      "metadata.tags.sys.id[all]": slug,
+      content_type: "article",
+      order: "-sys.createdAt",
     })
     posts = items.map((post) => {
       post.fields.tags = post.metadata.tags.map((tag) => {
         const { id } = tag.sys
         return {
           slug: id,
-          name: getTagName(id, tags)
+          name: getTagName(id, tags),
         }
       })
       return post
@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 
   return {
-    props: { posts, tag }
+    props: { posts, tag },
   }
 }
 
@@ -74,12 +74,17 @@ const TagSingle: NextPage<Props> = (props) => {
   const tagSlug = tag.sys.id
 
   return (
-    <Layout title={tagName} description={`タグ${tagName}の一覧ページです。`} type="article" url={`articles${tagSlug}`}>
+    <Layout
+      title={tagName}
+      description={`タグ${tagName}の一覧ページです。`}
+      type="article"
+      url={`articles${tagSlug}`}
+    >
       <Breadcrumb
         breadcrumbs={[
-          { name: 'Home', slug: '' },
-          { name: 'タグ一覧', slug: 'tags' },
-          { name: tagName, slug: tagSlug }
+          { name: "Home", slug: "" },
+          { name: "タグ一覧", slug: "tags" },
+          { name: tagName, slug: tagSlug },
         ]}
       />
       <PageTitle title={tagName} />

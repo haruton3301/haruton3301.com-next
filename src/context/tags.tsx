@@ -1,11 +1,12 @@
-import type { TagCollection } from 'contentful'
-import { createContext, useEffect, useState } from 'react'
+"use client"
 
-import type { ITagFields } from '~/libs/contentful'
-import { buildClient } from '~/libs/contentful'
+import type { ITagFields } from "@/libs/contentful"
+import { client } from "@/libs/contentful"
+import type { TagCollection } from "contentful"
+import { createContext, useContext, useEffect, useState } from "react"
 
 export type TagsContextType = {
-  useTags: () => ITagFields[]
+  tags: Array<ITagFields>
   getTagName: (id: string) => string
 }
 
@@ -17,7 +18,6 @@ type Props = {
 
 export const TagsProvider: React.FC<Props> = ({ children }) => {
   const [tags, setTags] = useState<ITagFields[]>([])
-  const client = buildClient()
 
   useEffect(() => {
     const fetchTags = async () => {
@@ -25,19 +25,23 @@ export const TagsProvider: React.FC<Props> = ({ children }) => {
       setTags(
         items.map((item) => ({
           slug: item.sys.id,
-          name: item.name
-        }))
+          name: item.name,
+        })),
       )
     }
     fetchTags()
   }, [])
 
-  const useTags = () => tags
-
   const getTagName = (slug: string) => {
     const tag = tags.find((tag) => tag.slug === slug)
-    return tag?.name || ''
+    return tag?.name || ""
   }
 
-  return <TagsContext.Provider value={{ useTags, getTagName }}>{children}</TagsContext.Provider>
+  return (
+    <TagsContext.Provider value={{ tags, getTagName }}>
+      {children}
+    </TagsContext.Provider>
+  )
 }
+
+export const useTags = (): TagsContextType => useContext(TagsContext)!

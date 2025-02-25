@@ -1,23 +1,30 @@
-import type { NextPage } from 'next/types'
+import type { NextPage } from "next/types"
 
-import { Breadcrumb } from '~/components/Breadcrumb'
-import { PageTitle } from '~/components/PageTitle'
-import { WhiteArticle } from '~/components/WhiteArticle'
-import { Layout } from '~/contents/Layout'
+import { Breadcrumb } from "@/components/Breadcrumb"
+import { PageTitle } from "@/components/PageTitle"
+import { WhiteArticle } from "@/components/WhiteArticle"
+import { Layout } from "@/contents/Layout"
 
 const Policy: NextPage = () => {
   return (
-    <Layout title="プライバシーポリシー" description="プライバシーポリシーのページです。" type="article" url="policy">
+    <Layout
+      title="プライバシーポリシー"
+      description="プライバシーポリシーのページです。"
+      type="article"
+      url="policy"
+    >
       <Breadcrumb
         breadcrumbs={[
-          { name: 'Home', slug: '' },
-          { name: 'プライバシーポリシー', slug: 'policy' }
+          { name: "Home", slug: "" },
+          { name: "プライバシーポリシー", slug: "policy" },
         ]}
       />
       <PageTitle title="プライバシーポリシー" />
       <WhiteArticle>
         <>
-          <p>当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を使用しています。</p>
+          <p>
+            当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を使用しています。
+          </p>
           <p>
             このGoogleアナリティクスはデータの収集のためにCookieを使用しています。このデータは匿名で収集されており、個人を特定するものではありません。
           </p>
@@ -34,7 +41,11 @@ const Policy: NextPage = () => {
               Googleアナリティクスサービス利用規約
             </a>
             や
-            <a href="https://policies.google.com/technologies/ads?hl=ja" rel="noopener noreferrer" target="_blank">
+            <a
+              href="https://policies.google.com/technologies/ads?hl=ja"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               Googleのポリシーの規約
             </a>
             をご覧ください。

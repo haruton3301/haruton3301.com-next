@@ -1,8 +1,8 @@
-import '~/styles/globals.scss'
+import "@/styles/globals.scss"
 
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app"
 
-import { Loading } from '~/components/Loading'
+import { Loading } from "@/components/Loading"
 
 type MyAppProps = AppProps
 

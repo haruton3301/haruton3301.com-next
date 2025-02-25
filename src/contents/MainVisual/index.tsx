@@ -20,7 +20,11 @@ export const MainVisual: React.FC = () => {
         <pre data-prefix=">">
           <code>
             このサイトは、はるとん(
-            <a href="https://twitter.com/haruton3301/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/haruton3301/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               @haruton3301
             </a>
             )が技術的なメモをつらつらと書くブログです。

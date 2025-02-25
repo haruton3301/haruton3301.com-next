@@ -1,13 +1,6 @@
-import type { Document } from '@contentful/rich-text-types'
-import type { Entry } from 'contentful'
-import { createClient } from 'contentful'
-
-export interface IChildTagFields {
-  fields: {
-    name: string
-    slug: string
-  }
-}
+import type { Document } from "@contentful/rich-text-types"
+import type { EntrySkeletonType } from "contentful"
+import { createClient } from "contentful"
 
 export interface ITagFields {
   name: string
@@ -21,30 +14,17 @@ export interface IPostFields {
   contentMarkdown: string
   description: string
   keywords: string
-  tags: ITagFields[]
+  tags: Array<string>
 }
 
-export interface IPost extends Entry<IPostFields> {
-  sys: {
-    id: string
-    type: string
-    createdAt: string
-    updatedAt: string
-    locale: string
-    contentType: {
-      sys: {
-        id: 'article'
-        linkType: 'ContentType'
-        type: 'Link'
-      }
-    }
-  }
-}
+export type TypePostSkeleton = EntrySkeletonType<IPostFields, "article">
 
 export const buildClient = () => {
   const client = createClient({
-    space: process.env.NEXT_PUBLIC_CTF_SPACE_ID || '',
-    accessToken: process.env.NEXT_PUBLIC_CTF_CDA_ACCESS_TOKEN || ''
+    space: process.env.NEXT_PUBLIC_CTF_SPACE_ID || "",
+    accessToken: process.env.NEXT_PUBLIC_CTF_CDA_ACCESS_TOKEN || "",
   })
   return client
 }
+
+export const client = buildClient()

@@ -1,5 +1,6 @@
-import Link from 'next/link'
-import { BiMenu } from 'react-icons/bi'
+import { siteTitle } from "@/libs/constants"
+import Link from "next/link"
+import { BiMenu } from "react-icons/bi"
 
 type Props = {
   isOpen: boolean
@@ -25,11 +26,13 @@ export const Header: React.FC<Props> = (props) => {
           </div>
           <div className="">
             <Link href="/">
-              <a>
-                <button className="btn btn-ghost h-10">
-                  <img src="/images/header_logo.png" alt="はるとんのブログ" style={{ width: 209, height: 34 }} />
-                </button>
-              </a>
+              <button className="btn btn-ghost h-10">
+                <img
+                  src="/images/header_logo.png"
+                  alt={siteTitle}
+                  style={{ width: 209, height: 34 }}
+                />
+              </button>
             </Link>
           </div>
         </div>

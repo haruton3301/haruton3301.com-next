@@ -1,15 +1,15 @@
-import type { Entry, EntryCollection } from 'contentful'
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next/types'
-import type { ParsedUrlQuery } from 'querystring'
+import type { Entry, EntryCollection } from "contentful"
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next/types"
+import type { ParsedUrlQuery } from "querystring"
 
-import { Article } from '~/components/Article'
-import { ArticleList } from '~/components/ArticleList'
-import { Breadcrumb } from '~/components/Breadcrumb'
-import { PageTitle } from '~/components/PageTitle'
-import { Layout } from '~/contents/Layout'
-import type { IPostFields } from '~/libs/contentful'
-import { buildClient } from '~/libs/contentful'
-import { getTagName } from '~/libs/tags'
+import { Article } from "@/components/Article"
+import { ArticleList } from "@/components/ArticleList"
+import { Breadcrumb } from "@/components/Breadcrumb"
+import { PageTitle } from "@/components/PageTitle"
+import { Layout } from "@/contents/Layout"
+import type { IPostFields } from "@/libs/contentful"
+import { buildClient } from "@/libs/contentful"
+import { getTagName } from "@/libs/tags"
 
 const client = buildClient()
 
@@ -24,16 +24,16 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { items }: EntryCollection<IPostFields> = await client.getEntries({
-    content_type: 'article',
-    order: '-sys.createdAt'
+    content_type: "article",
+    order: "-sys.createdAt",
   })
 
   const posts = items
 
   const paths = posts.map((post) => ({
     params: {
-      slug: post.fields.slug
-    }
+      slug: post.fields.slug,
+    },
   }))
 
   return { paths, fallback: false }
@@ -42,9 +42,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as IParams
   const { items }: EntryCollection<IPostFields> = await client.getEntries({
-    content_type: 'article',
-    'fields.slug': slug,
-    limit: 1
+    content_type: "article",
+    "fields.slug": slug,
+    limit: 1,
   })
 
   const { items: tags } = await client.getTags()
@@ -54,22 +54,22 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { id } = tag.sys
     return {
       slug: id,
-      name: getTagName(id, tags)
+      name: getTagName(id, tags),
     }
   })
   const post = _post
 
-  let tagQuery = ''
+  let tagQuery = ""
   for (let i = 0; i < post.fields.tags.length; i++) {
-    const separater = i !== post.fields.tags.length - 1 ? ', ' : ''
+    const separater = i !== post.fields.tags.length - 1 ? ", " : ""
     tagQuery += `${post.fields.tags[i].slug}${separater}`
   }
 
   const { items: _relatedPosts } = (await client.getEntries({
-    content_type: 'article',
-    order: '-sys.createdAt',
-    'metadata.tags.sys.id[in]': tagQuery,
-    limit: 6
+    content_type: "article",
+    order: "-sys.createdAt",
+    "metadata.tags.sys.id[in]": tagQuery,
+    limit: 6,
   })) as EntryCollection<IPostFields>
 
   const relatedPosts = _relatedPosts
@@ -78,7 +78,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         const { id } = tag.sys
         return {
           slug: id,
-          name: getTagName(id, tags)
+          name: getTagName(id, tags),
         }
       })
       return post
@@ -86,7 +86,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     .filter((item) => !(item.fields.slug === slug))
 
   return {
-    props: { post, relatedPosts }
+    props: { post, relatedPosts },
   }
 }
 
@@ -103,9 +103,9 @@ const ArticleSingle: NextPage<Props> = (props) => {
     >
       <Breadcrumb
         breadcrumbs={[
-          { name: 'Home', slug: '' },
-          { name: '記事一覧', slug: 'articles' },
-          { name: post.fields.title, slug: post.fields.slug }
+          { name: "Home", slug: "" },
+          { name: "記事一覧", slug: "articles" },
+          { name: post.fields.title, slug: post.fields.slug },
         ]}
       />
       <Article post={post} />

@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@use "tailwindcss" as *;
+@plugin "daisyui";
 
 .bg-rainbow {
   background: -moz-linear-gradient(to right, #40e0d0, #ff8c00 40%, #ff0080);
@@ -34,7 +33,7 @@
 
 .l-breadcrumb li + li:after {
   display: block;
-  content: '';
+  content: "";
   position: absolute;
   left: 8px;
   top: 11px;
@@ -90,7 +89,7 @@
     padding-left: 2px;
     font-weight: bold;
     line-height: 1.5;
-    font-feature-settings: 'palt';
+    font-feature-settings: "palt";
     margin-top: 32px;
     margin-bottom: 16px;
     position: relative;
@@ -101,7 +100,7 @@
     padding-left: 2px;
     font-weight: bold;
     line-height: 1.5;
-    font-feature-settings: 'palt';
+    font-feature-settings: "palt";
     margin-top: 24px;
     margin-bottom: 16px;
     position: relative;
@@ -180,12 +179,27 @@
 
     border: 4px solid;
     border-radius: 10px;
-    border-image: -moz-linear-gradient(to right, rgb(64, 224, 208), rgb(255, 140, 0) 40%, rgb(237, 227, 232)) 1 / 1 / 0
-      stretch;
-    border-image: -webkit-linear-gradient(to right, rgb(64, 224, 208), rgb(255, 140, 0) 40%, rgb(237, 227, 232)) 1 / 1 /
-      0 stretch;
-    border-image: linear-gradient(to right, rgb(64, 224, 208), rgb(255, 140, 0) 40%, rgb(237, 227, 232)) 1 / 1 / 0
-      stretch;
+    border-image: -moz-linear-gradient(
+        to right,
+        rgb(64, 224, 208),
+        rgb(255, 140, 0) 40%,
+        rgb(237, 227, 232)
+      )
+      1 / 1 / 0 stretch;
+    border-image: -webkit-linear-gradient(
+        to right,
+        rgb(64, 224, 208),
+        rgb(255, 140, 0) 40%,
+        rgb(237, 227, 232)
+      )
+      1 / 1 / 0 stretch;
+    border-image: linear-gradient(
+        to right,
+        rgb(64, 224, 208),
+        rgb(255, 140, 0) 40%,
+        rgb(237, 227, 232)
+      )
+      1 / 1 / 0 stretch;
   }
 
   .entry-card a {
