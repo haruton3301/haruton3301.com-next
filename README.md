@@ -2,4 +2,4 @@
 
 ## url
 
-https://haruton3301.com
+https://haruton3301.vercel.app
